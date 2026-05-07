@@ -7,13 +7,30 @@ from models.user import User
 auth_bp = Blueprint('auth', __name__)
 
 
+def _verify_password(user, password):
+    """Xác thực mật khẩu - hỗ trợ cả plain text cũ và hash mới."""
+    stored = user.PasswordHash
+    # Nếu đã hash rồi thì dùng check_password_hash
+    if stored.startswith('pbkdf2:sha256:') or stored.startswith('scrypt:'):
+        return check_password_hash(stored, password)
+    # Nếu còn plain text thì so sánh trực tiếp + tự động migrate sang hash
+    if stored == password:
+        user.PasswordHash = generate_password_hash(password, method='pbkdf2:sha256')
+        try:
+            db.session.commit()
+        except Exception:
+            db.session.rollback()
+        return True
+    return False
+
+
 @auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
         user = User.query.filter_by(Email=email).first()
-        if user and check_password_hash(user.PasswordHash, password):
+        if user and _verify_password(user, password):
             login_user(user)
             if user.Role == 'Admin':
                 return redirect(url_for('admin.dashboard'))
