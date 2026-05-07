@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Kết quả tìm kiếm - Tour Việt{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex align-items-center mb-4">
+        <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+            <i class="fas fa-search fa-lg"></i>
+        </div>
+        <div>
+            <h2 class="fw-bold mb-0">Kết quả tìm kiếm</h2>
+            <p class="text-muted mb-0">Tìm thấy <span class="text-primary fw-bold">{{ tours|length }}</span> tour phù hợp với từ khóa "<span class="fw-bold">{{ query }}</span>"</p>
+        </div>
+    </div>
+
+    <hr class="mb-5 opacity-25">
+
+    {% if not tours %}
+        <div class="text-center py-5">
+            <img src="https://cdn-icons-png.flaticon.com/512/6134/6134065.png" alt="No results" style="width: 150px;" class="mb-4 opacity-50">
+            <h4 class="text-muted">Rất tiếc, chúng tôi không tìm thấy tour nào!</h4>
+            <p class="text-muted">Sơn hãy thử lại với một từ khóa khác hoặc quay lại trang chủ nhé.</p>
+            <a href="/" class="btn btn-primary rounded-pill px-4 mt-3">Quay lại trang chủ</a>
+        </div>
+    {% else %}
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+            {% for tour in tours %}
+            <div class="col">
+                <div class="card h-100 tour-card border-0 shadow-sm rounded-3 overflow-hidden transition-all">
+                    <div class="ratio ratio-16x9">
+                        <img src="{{ url_for('static', filename=tour.ImageThumbnail) if tour.ImageThumbnail else 'https://via.placeholder.com/400x225' }}"
+                             class="card-img-top object-fit-cover" alt="{{ tour.TourName }}"
+                             onerror="this.src='https://via.placeholder.com/400x225?text=Tour+Viet';">
+                    </div>
+                    <div class="card-body p-3 d-flex flex-column">
+                        <h6 class="card-title fw-bold text-dark text-truncate mb-2">{{ tour.TourName }}</h6>
+                        <div class="small text-muted mb-3 flex-grow-1">
+                            <p class="mb-1"><i class="fas fa-map-marker-alt text-primary me-2"></i>{{ tour.DepartureLocation }}</p>
+                            <p class="mb-0"><i class="fas fa-clock text-primary me-2"></i>{{ tour.Duration }}</p>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <span class="text-danger fw-bold fs-5">{{ "{:,.0f}".format(tour.Price) }} đ</span>
+                            <a href="{{ url_for('main.tour_detail', tour_id=tour.TourID) }}" class="btn btn-primary btn-sm rounded-pill px-3">Chi tiết</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+
+<style>
+    .tour-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+    }
+</style>
+{% endblock %}

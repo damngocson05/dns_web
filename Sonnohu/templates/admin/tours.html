@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">📦 Quản lý danh sách Tour</h2>
+        <a href="{{ url_for('admin.add_tour') }}" class="btn btn-success"> + Thêm Tour mới</a>
+    </div>
+
+    <div class="table-responsive bg-white shadow-sm rounded">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Tên Tour</th>
+                    <th>Giá</th>
+                    <th>Điểm đi</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tour in tours %}
+                <tr>
+                    <td>{{ tour.TourID }}</td>
+                    <td><b>{{ tour.TourName }}</b></td>
+                    <td class="text-danger">{{ "{:,.0f}".format(tour.Price) }}đ</td>
+                    <td>{{ tour.DepartureLocation }}</td>
+                    <td>
+                        <form action="{{ url_for('admin.delete_tour', tour_id=tour.TourID) }}" method="POST" style="display:inline;">
+                            <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Xóa tour này?')">Xóa</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

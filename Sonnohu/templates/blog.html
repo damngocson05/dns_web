@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Cẩm nang du lịch - Tour Việt{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row align-items-center mb-5">
+        <div class="col-md-6">
+            <h1 class="display-4 fw-bold text-dark mb-3">Cẩm nang <span class="text-primary">Du lịch</span></h1>
+            <p class="lead text-muted">Chia sẻ những kinh nghiệm, bí kíp và cảm hứng cho mỗi hành trình khám phá vẻ đẹp Việt Nam của bạn.</p>
+        </div>
+        <div class="col-md-6">
+            <div class="input-group shadow-sm rounded-pill overflow-hidden">
+                <input type="text" class="form-control border-0 p-3 ps-4" placeholder="Tìm kiếm bài viết...">
+                <button class="btn btn-primary px-4"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden featured-card">
+                <div class="row g-0">
+                    <div class="col-lg-7">
+                        <img src="https://images.unsplash.com/photo-1504457047772-27faf1c00561?q=80&w=1200&auto=format&fit=crop"
+                             class="img-fluid h-100 w-100 object-fit-cover" alt="Sapa">
+                    </div>
+                    <div class="col-lg-5 d-flex align-items-center bg-white p-4 p-md-5">
+                        <div>
+                            <span class="badge bg-danger mb-3 px-3 py-2 rounded-pill">Hot Trend</span>
+                            <h2 class="fw-bold mb-3">Kinh nghiệm chinh phục đỉnh Fansipan - Nóc nhà Đông Dương</h2>
+                            <p class="text-muted mb-4">Fansipan không chỉ là thử thách dành cho những người leo núi chuyên nghiệp mà còn là điểm đến mơ ước của mọi du khách khi đến với Sapa...</p>
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="avatar-sm bg-primary text-white rounded-circle me-3 d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">S</div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">Admin Sơn</h6>
+                                    <small class="text-muted">15 Tháng 4, 2026</small>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-primary rounded-pill px-4 fw-bold">Đọc tiếp <i class="fas fa-arrow-right ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100 blog-card">
+                <div class="position-relative">
+                    <img src="https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=800&auto=format&fit=crop"
+                         class="card-img-top rounded-top-4" alt="Hanoi" style="height: 220px; object-fit: cover;">
+                    <span class="badge bg-primary position-absolute top-0 start-0 m-3 rounded-pill px-3">Ẩm thực</span>
+                </div>
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3">Top 5 món ngon vỉa hè Hà Nội phải thử</h5>
+                    <p class="text-muted small">Khám phá thiên đường ẩm thực thủ đô với những món ăn đậm chất truyền thống...</p>
+                    <hr class="opacity-25">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted"><i class="far fa-eye me-1"></i> 1,2k xem</small>
+                        <a href="#" class="text-primary fw-bold text-decoration-none small">Chi tiết <i class="fas fa-chevron-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100 blog-card">
+                <div class="position-relative">
+                    <img src="https://images.unsplash.com/photo-1599708153386-62bf3f035c78?q=80&w=800&auto=format&fit=crop"
+                         class="card-img-top rounded-top-4" alt="Da Nang" style="height: 220px; object-fit: cover;">
+                    <span class="badge bg-success position-absolute top-0 start-0 m-3 rounded-pill px-3">Lịch trình</span>
+                </div>
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3">Lịch trình Đà Nẵng 3 ngày 2 đêm tự túc</h5>
+                    <p class="text-muted small">Gợi ý lịch trình chi tiết giúp bạn khám phá trọn vẹn vẻ đẹp của thành phố đáng sống nhất VN...</p>
+                    <hr class="opacity-25">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted"><i class="far fa-eye me-1"></i> 850 xem</small>
+                        <a href="#" class="text-primary fw-bold text-decoration-none small">Chi tiết <i class="fas fa-chevron-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-4 h-100 blog-card">
+                <div class="position-relative">
+                    <img src="https://images.unsplash.com/photo-1559592490-3037f4055273?q=80&w=800&auto=format&fit=crop"
+                         class="card-img-top rounded-top-4" alt="Phu Quoc" style="height: 220px; object-fit: cover;">
+                    <span class="badge bg-info text-white position-absolute top-0 start-0 m-3 rounded-pill px-3">Biển đảo</span>
+                </div>
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-3">Phú Quốc mùa nào đẹp nhất trong năm?</h5>
+                    <p class="text-muted small">Kinh nghiệm đi Phú Quốc để tránh mùa mưa và tận hưởng làn nước xanh ngắt tại đảo Ngọc...</p>
+                    <hr class="opacity-25">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <small class="text-muted"><i class="far fa-eye me-1"></i> 2,4k xem</small>
+                        <a href="#" class="text-primary fw-bold text-decoration-none small">Chi tiết <i class="fas fa-chevron-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav aria-label="Blog navigation">
+        <ul class="pagination justify-content-center">
+            <li class="page-item disabled"><a class="page-link rounded-circle me-2" href="#"><i class="fas fa-chevron-left"></i></a></li>
+            <li class="page-item active"><a class="page-link rounded-circle me-2" href="#">1</a></li>
+            <li class="page-item"><a class="page-link rounded-circle me-2" href="#">2</a></li>
+            <li class="page-item"><a class="page-link rounded-circle" href="#"><i class="fas fa-chevron-right"></i></a></li>
+        </ul>
+    </nav>
+</div>
+
+<style>
+    .featured-card {
+        transition: transform 0.3s ease;
+    }
+    .blog-card {
+        transition: all 0.3s ease;
+        border: 1px solid rgba(0,0,0,0.05);
+    }
+    .blog-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+    }
+    .pagination .page-link {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        color: #6c757d;
+        background: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .pagination .page-item.active .page-link {
+        background-color: #0d6efd;
+        color: #fff;
+    }
+    .object-fit-cover { object-fit: cover; }
+</style>
+{% endblock %}

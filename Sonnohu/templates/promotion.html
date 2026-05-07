@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="fw-bold text-primary text-uppercase">🎁 Ưu Đãi Đặc Biệt</h1>
+        <p class="text-muted">Đừng bỏ lỡ cơ hội khám phá Việt Nam với chi phí tiết kiệm nhất</p>
+        <div class="mx-auto bg-warning" style="height: 4px; width: 80px; border-radius: 2px;"></div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm bg-primary text-white p-4 position-relative overflow-hidden" style="border-radius: 20px;">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="fw-bold mb-1">CHÀO HÈ 2026</h4>
+                        <p class="mb-0">Giảm ngay <span class="fs-3 fw-bold text-warning">500.000đ</span></p>
+                        <small>Áp dụng cho các tour miền Bắc</small>
+                    </div>
+                    <div class="bg-white text-primary px-3 py-2 rounded-3 fw-bold">HE2026</div>
+                </div>
+                <div class="position-absolute bg-light rounded-circle" style="width: 30px; height: 30px; left: -15px; top: 50%; transform: translateY(-50%);"></div>
+                <div class="position-absolute bg-light rounded-circle" style="width: 30px; height: 30px; right: -15px; top: 50%; transform: translateY(-50%);"></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border-0 shadow-sm bg-danger text-white p-4 position-relative overflow-hidden" style="border-radius: 20px;">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="fw-bold mb-1">MỚI THÀNH VIÊN</h4>
+                        <p class="mb-0">Giảm ngay <span class="fs-3 fw-bold text-warning">10%</span></p>
+                        <small>Áp dụng cho đơn hàng đầu tiên</small>
+                    </div>
+                    <div class="bg-white text-danger px-3 py-2 rounded-3 fw-bold">TOURMOI</div>
+                </div>
+                <div class="position-absolute bg-light rounded-circle" style="width: 30px; height: 30px; left: -15px; top: 50%; transform: translateY(-50%);"></div>
+                <div class="position-absolute bg-light rounded-circle" style="width: 30px; height: 30px; right: -15px; top: 50%; transform: translateY(-50%);"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-12 text-center py-5 rounded-4 shadow-sm" style="background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80'); background-size: cover; background-position: center; color: white;">
+            <h2 class="fw-bold mb-3">COMBO DU LỊCH BIỂN ĐẢO</h2>
+            <p class="fs-5 mb-4">Trọn gói máy bay + Khách sạn 5 sao chỉ từ 3.999.000đ</p>
+            <button class="btn btn-warning btn-lg fw-bold rounded-pill px-5">ĐẶT NGAY</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card:hover {
+        transform: scale(1.02);
+        transition: 0.3s;
+    }
+</style>
+{% endblock %}

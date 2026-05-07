@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-4">
+    <h2 class="fw-bold mb-4">⚙️ Danh sách Đơn đặt Tour (Admin)</h2>
+    <div class="table-responsive bg-white shadow-sm rounded">
+        <table class="table table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th>Mã Đơn</th>
+                    <th>Khách Hàng</th>
+                    <th>Tour</th>
+                    <th>Tổng Tiền</th>
+                    <th>Trạng Thái</th>
+                    <th>Thao Tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for b in bookings %}
+                <tr>
+                    <td>#BK-{{ b.BookingID }}</td>
+                    <td>{{ b.user.FullName }}</td>
+                    <td>{{ b.tour.TourName }}</td>
+                    <td class="text-danger fw-bold">{{ "{:,.0f}".format(b.TotalPrice) }}đ</td>
+                    <td>
+                        <span class="badge {% if b.Status == 'Đang chờ duyệt' %}bg-warning text-dark{% else %}bg-success{% endif %}">
+                            {{ b.Status }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if b.Status == 'Đang chờ duyệt' %}
+                        <form action="{{ url_for('admin.approve_booking', booking_id=b.BookingID) }}" method="POST">
+                            <button type="submit" class="btn btn-sm btn-success">Duyệt</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

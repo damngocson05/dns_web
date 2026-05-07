@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row mb-5">
+    <div class="col-12 p-0">
+        <div class="hero-banner shadow rounded-3 text-white d-flex align-items-center justify-content-center text-center p-5"
+             style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)),
+                          url('{{ url_for('static', filename='img/banners/main-banner.jpg') }}');
+                    background-size: cover;
+                    background-position: center;
+                    min-height: 400px;
+                    border-radius: 15px;">
+            <div>
+                <h1 class="display-3 fw-bold mb-3 text-uppercase"
+                    style="letter-spacing: 2px; text-shadow: 2px 2px 4px rgba(0,0,0,0.6);">
+                    Khám Phá Việt Nam
+                </h1>
+                <p class="fs-4 mb-4 opacity-90"
+                   style="text-shadow: 1px 1px 2px rgba(0,0,0,0.5); font-weight: 300;">
+                    Trải nghiệm những hành trình du lịch tuyệt vời nhất cùng <span class="fw-bold text-warning">TOUR VIỆT</span>
+                </p>
+                <a href="#tours" class="btn btn-warning btn-lg fw-bold px-5 rounded-pill shadow-lg btn-hero">
+                    <i class="fas fa-search me-2"></i>Tìm Tour Ngay
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-5 py-4">
+    <div class="row text-center g-4">
+        <div class="col-md-4">
+            <div class="p-4 bg-white shadow-sm rounded-3 h-100 border-top border-primary border-4 card-hover">
+                <i class="fas fa-tags fa-3x text-primary mb-3"></i>
+                <h5 class="fw-bold">Giá tốt nhất</h5>
+                <p class="text-muted small mb-0">Nhiều chương trình ưu đãi, giảm giá lên đến 30% cho khách hàng thân thiết.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 bg-white shadow-sm rounded-3 h-100 border-top border-success border-4 card-hover">
+                <i class="fas fa-shield-alt fa-3x text-success mb-3"></i>
+                <h5 class="fw-bold">Bảo hiểm trọn gói</h5>
+                <p class="text-muted small mb-0">Mọi chuyến đi đều được bảo hiểm đầy đủ, giúp bạn an tâm tận hưởng kỳ nghỉ.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 bg-white shadow-sm rounded-3 h-100 border-top border-warning border-4 card-hover">
+                <i class="fas fa-headset fa-3x text-warning mb-3"></i>
+                <h5 class="fw-bold">Hỗ trợ 24/7</h5>
+                <p class="text-muted small mb-0">Đội ngũ tư vấn nhiệt tình, sẵn sàng giải đáp thắc mắc mọi lúc mọi nơi.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="tours" class="mb-5">
+    {% for category in categories %}
+    <div class="mb-5" id="region-{{ category.CategoryID }}">
+        <div class="d-flex align-items-center mb-4 border-bottom border-primary border-3 pb-2 w-fit-content">
+            <h2 class="fw-bold text-dark mb-0 me-3">
+                {% if 'Bắc' in category.CategoryName %} ⛰️ {% elif 'Trung' in category.CategoryName %} 🌊 {% elif 'Nam' in category.CategoryName %} ☀️ {% else %} 📍 {% endif %}
+                {{ category.CategoryName }}
+            </h2>
+            <small class="text-muted fs-6">({{ category.tours|length }} tour hoạt động)</small>
+        </div>
+
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 g-4">
+            {% if not category.tours %}
+                <div class="col-12 text-center text-muted py-5">
+                    <i class="fas fa-umbrella-beach fa-3x mb-3 text-light"></i>
+                    <p>Hiện tại chưa có tour nào hoạt động tại khu vực này.</p>
+                </div>
+            {% else %}
+                {% for tour in category.tours %}
+                <div class="col">
+                    <div class="card h-100 tour-card border-0 shadow-sm rounded-3 overflow-hidden transition-all">
+                        <div class="ratio ratio-16x9 bg-light">
+                            <img src="{{ url_for('static', filename=tour.ImageThumbnail) if tour.ImageThumbnail else url_for('static', filename='img/no-image.jpg') }}"
+                                 class="card-img-top object-fit-cover" alt="{{ tour.TourName }}"
+                                 onerror="this.src='https://via.placeholder.com/400x225?text=Anh+Tour';">
+                        </div>
+                        <div class="card-body d-flex flex-column p-3">
+                            <h6 class="card-title fw-bold text-dark text-truncate mb-2" title="{{ tour.TourName }}">{{ tour.TourName }}</h6>
+                            <div class="small text-muted mb-3 flex-grow-1">
+                                <p class="mb-1 text-truncate"><i class="fas fa-map-marker-alt text-primary me-2"></i>{{ tour.DepartureLocation }}</p>
+                                <p class="mb-0"><i class="fas fa-clock text-primary me-2"></i>{{ tour.Duration }}</p>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center mt-auto">
+                                <span class="text-danger fw-bold fs-5">{{ "{:,.0f}".format(tour.Price) }} đ</span>
+                                <a href="{{ url_for('main.tour_detail', tour_id=tour.TourID) }}" class="btn btn-primary btn-sm rounded-pill fw-bold px-3">Chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="container mb-5 pb-5">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h2 class="fw-bold">📰 Cẩm nang du lịch</h2>
+            <p class="text-muted mb-0">Chia sẻ bí kíp du lịch hữu ích cho chuyến hành trình của bạn</p>
+        </div>
+        <a href="#" class="text-primary fw-bold text-decoration-none">Xem tất cả <i class="fas fa-arrow-right"></i></a>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-3 overflow-hidden h-100 card-hover">
+                <img src="https://images.unsplash.com/photo-1528127269322-539801943592?q=80&w=800&auto=format&fit=crop" class="card-img-top" alt="Hanoi" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <span class="badge bg-primary-subtle text-primary mb-2">Kinh nghiệm</span>
+                    <h6 class="fw-bold">Top 5 món ngon vỉa hè Hà Nội phải thử</h6>
+                    <p class="text-muted small mb-0">Khám phá thiên đường ẩm thực thủ đô với những món ăn đậm chất...</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-3 overflow-hidden h-100 card-hover">
+                <img src="https://images.unsplash.com/photo-1599708153386-62bf3f035c78?q=80&w=800&auto=format&fit=crop" class="card-img-top" alt="Da Nang" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <span class="badge bg-success-subtle text-success mb-2">Điểm đến</span>
+                    <h6 class="fw-bold">Lịch trình Đà Nẵng 3 ngày 2 đêm tự túc</h6>
+                    <p class="text-muted small mb-0">Gợi ý lịch trình chi tiết giúp bạn khám phá trọn vẹn vẻ đẹp của...</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card border-0 shadow-sm rounded-3 overflow-hidden h-100 card-hover">
+                <img src="https://images.unsplash.com/photo-1589308078059-be1415eab4c3?q=80&w=800&auto=format&fit=crop" class="card-img-top" alt="Sapa" style="height: 200px; object-fit: cover;">
+                <div class="card-body">
+                    <span class="badge bg-warning-subtle text-warning mb-2">Mẹo vặt</span>
+                    <h6 class="fw-bold">Đi du lịch vùng cao cần chuẩn bị gì?</h6>
+                    <p class="text-muted small mb-0">Những vật dụng thiết yếu không thể thiếu để có một chuyến đi an toàn...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .tour-card, .card-hover { border-radius: 12px; transition: all 0.3s ease; }
+    .tour-card:hover, .card-hover:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1) !important;
+    }
+    .btn-hero { transition: all 0.3s ease; }
+    .btn-hero:hover { transform: scale(1.05); background-color: #ffca2c !important; }
+    .bg-primary-subtle { background-color: #cfe2ff; }
+    .bg-success-subtle { background-color: #d1e7dd; }
+    .bg-warning-subtle { background-color: #fff3cd; }
+    .object-fit-cover { object-fit: cover; }
+    .w-fit-content { width: fit-content; }
+</style>
+{% endblock %}

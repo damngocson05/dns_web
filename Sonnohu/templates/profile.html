@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5 pb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-9">
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-header bg-primary text-white py-3">
+                    <h5 class="mb-0 fw-bold">⚙️ Chỉnh sửa hồ sơ cá nhân</h5>
+                </div>
+                <div class="card-body p-4">
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                      {% if messages %}
+                        {% for cat, msg in messages %}
+                          <div class="alert alert-{{ cat }} border-0 shadow-sm">{{ msg }}</div>
+                        {% endfor %}
+                      {% endif %}
+                    {% endwith %}
+
+                    <form method="POST">
+                        <h6 class="text-primary fw-bold mb-3 border-bottom pb-2">Thông tin cơ bản</h6>
+                        <div class="row mb-3">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Họ và tên</label>
+                                <input type="text" class="form-control" name="fullname" value="{{ current_user.FullName }}" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-bold">Số điện thoại</label>
+                                <input type="text" class="form-control" name="phone" value="{{ current_user.Phone or '' }}" required>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label fw-bold">Địa chỉ Email (Cố định)</label>
+                            <input type="text" class="form-control bg-light" value="{{ current_user.Email }}" readonly disabled>
+                        </div>
+
+                        <h6 class="text-primary fw-bold mb-3 border-bottom pb-2">Địa chỉ liên hệ</h6>
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Tỉnh / Thành phố</label>
+                                <select class="form-select" id="province">
+                                    <option value="">Chọn Tỉnh/Thành phố</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Quận / Huyện</label>
+                                <select class="form-select" id="district">
+                                    <option value="">Chọn Quận/Huyện</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label class="form-label">Xã / Phường</label>
+                                <select class="form-select" id="ward">
+                                    <option value="">Chọn Xã/Phường</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Số nhà, Thôn, Xóm...</label>
+                            <input type="text" class="form-control" id="address_detail" placeholder="Ví dụ: Số 123, Ngõ 4...">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label text-muted small italic">Địa chỉ hiện tại của bạn:</label>
+                            <input type="text" class="form-control bg-light border-dashed" id="display_current_address" value="{{ current_user.Address or 'Chưa cập nhật' }}" readonly>
+                        </div>
+
+                        <input type="hidden" name="address" id="full_address_input" value="{{ current_user.Address or '' }}">
+
+                        <div class="text-end mt-4">
+                            <button type="submit" class="btn btn-primary px-5 fw-bold shadow-sm">Lưu cập nhật</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // 1. Load tỉnh thành
+        $.getJSON('https://provinces.open-api.vn/api/p/', function(data) {
+            $.each(data, function(index, value) {
+                $('#province').append('<option value="'+value.code+'">'+value.name+'</option>');
+            });
+        });
+
+        // 2. Chọn Tỉnh -> Huyện
+        $('#province').change(function() {
+            let p_code = $(this).val();
+            $('#district').html('<option value="">Chọn Quận/Huyện</option>');
+            $('#ward').html('<option value="">Chọn Xã/Phường</option>');
+            if(p_code) {
+                $.getJSON('https://provinces.open-api.vn/api/p/'+p_code+'?depth=2', function(data) {
+                    $.each(data.districts, function(index, value) {
+                        $('#district').append('<option value="'+value.code+'">'+value.name+'</option>');
+                    });
+                });
+            }
+        });
+
+        // 3. Chọn Huyện -> Xã
+        $('#district').change(function() {
+            let d_code = $(this).val();
+            $('#ward').html('<option value="">Chọn Xã/Phường</option>');
+            if(d_code) {
+                $.getJSON('https://provinces.open-api.vn/api/d/'+d_code+'?depth=2', function(data) {
+                    $.each(data.wards, function(index, value) {
+                        $('#ward').append('<option value="'+value.code+'">'+value.name+'</option>');
+                    });
+                });
+            }
+        });
+
+        // 4. Khi nhấn Submit: Gộp địa chỉ
+        $('form').submit(function() {
+            let detail = $('#address_detail').val();
+            let ward = $("#ward option:selected").text();
+            let district = $("#district option:selected").text();
+            let province = $("#province option:selected").text();
+
+            // Chỉ gộp địa chỉ mới nếu người dùng có chọn Tỉnh/Thành
+            if ($('#province').val() !== "") {
+                let fullAddress = detail + ", " + ward + ", " + district + ", " + province;
+                $('#full_address_input').val(fullAddress);
+            }
+        });
+    });
+</script>
+
+<style>
+    .border-dashed { border-style: dashed !important; }
+    .card { border-radius: 12px; }
+    .form-label { color: #444; }
+</style>
+{% endblock %}
