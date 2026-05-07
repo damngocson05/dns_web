@@ -1,4 +1,6 @@
 flask
 flask-sqlalchemy
+flask-login
 pyodbc
 python-dotenv
+werkzeug
