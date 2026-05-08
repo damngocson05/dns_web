@@ -17,55 +17,196 @@
             min-height: 100vh;
         }
 
-        /* Navbar Styling */
+        /* ===== NAVBAR ===== */
         .navbar {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            padding: 0.8rem 0;
-        }
-        .navbar-brand {
-            font-size: 1.6rem;
-            letter-spacing: 1px;
-        }
-
-        /* Menu Links */
-        .nav-link {
-            font-weight: 500;
-            margin: 0 5px;
-            transition: all 0.3s ease;
-        }
-        .nav-link:hover {
-            color: #ffc107 !important;
-            transform: translateY(-1px);
-        }
-
-        /* User Box Styling */
-        .user-nav-box {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 50px;
-            padding: 5px 18px !important;
-            transition: background 0.3s;
-        }
-        .user-nav-box:hover {
-            background: rgba(255, 255, 255, 0.25);
-        }
-
-        /* Dropdown Menu Styling */
-        .dropdown-menu {
-            border-radius: 12px;
-            padding: 10px;
-            margin-top: 10px !important;
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%) !important;
+            padding: 0;
             border: none;
+            box-shadow: 0 4px 20px rgba(30, 27, 75, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1050;
         }
-        .dropdown-item {
+
+        .navbar .container {
+            padding-top: 0.6rem;
+            padding-bottom: 0.6rem;
+        }
+
+        .navbar-brand {
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #fff !important;
+            text-decoration: none;
+        }
+
+        .navbar-brand .brand-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, #818cf8, #a78bfa);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            box-shadow: 0 2px 8px rgba(129, 140, 248, 0.4);
+        }
+
+        .navbar-brand span {
+            background: linear-gradient(135deg, #c7d2fe, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Nav Links */
+        .navbar-nav .nav-link {
+            color: rgba(255, 255, 255, 0.75) !important;
+            font-weight: 500;
+            font-size: 0.9rem;
+            padding: 0.5rem 0.85rem !important;
             border-radius: 8px;
-            padding: 8px 15px;
-            margin-bottom: 2px;
-            transition: all 0.2s;
+            transition: all 0.25s ease;
+            margin: 0 2px;
+            position: relative;
         }
+
+        .navbar-nav .nav-link:hover {
+            color: #fff !important;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-nav .nav-link.active {
+            color: #fff !important;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .navbar-nav .nav-link i {
+            font-size: 0.78rem;
+            opacity: 0.8;
+            margin-right: 0.35rem;
+        }
+
+        /* User Avatar Button */
+        .user-nav-box {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50px;
+            padding: 0.35rem 1rem !important;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.25s ease;
+            color: #fff !important;
+            font-size: 0.88rem;
+        }
+
+        .user-nav-box:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        .user-nav-box .user-avatar {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #818cf8, #a78bfa);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        /* Dropdown */
+        .dropdown-menu {
+            border-radius: 14px;
+            padding: 8px;
+            margin-top: 8px !important;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12);
+            min-width: 220px;
+            animation: dropdownFade 0.2s ease;
+        }
+
+        @keyframes dropdownFade {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-item {
+            border-radius: 10px;
+            padding: 0.6rem 1rem;
+            margin-bottom: 2px;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-item i {
+            width: 20px;
+            text-align: center;
+            margin-right: 0.6rem;
+            font-size: 0.85rem;
+        }
+
         .dropdown-item:hover {
-            background-color: #f8f9fa;
-            color: #0d6efd;
-            padding-left: 20px;
+            background: #f0f0ff;
+            color: #4f46e5;
+            padding-left: 1.2rem;
+        }
+
+        .dropdown-item.text-danger:hover {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .dropdown-divider {
+            margin: 4px 8px;
+            border-color: #f1f5f9;
+        }
+
+        /* Login Button (when not logged in) */
+        .btn-login-nav {
+            background: linear-gradient(135deg, #818cf8, #6366f1);
+            color: #fff !important;
+            border: none;
+            border-radius: 50px;
+            padding: 0.45rem 1.3rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
+            text-decoration: none;
+        }
+
+        .btn-login-nav:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+            color: #fff !important;
+        }
+
+        /* Toggler */
+        .navbar-toggler {
+            border: 1px solid rgba(255, 255, 255, 0.25) !important;
+            padding: 0.4rem 0.6rem;
+            border-radius: 8px;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(129, 140, 248, 0.3);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
         }
 
         .alert { border-radius: 12px; }
@@ -77,20 +218,44 @@
             transition: color 0.3s;
         }
         .footer-link:hover {
-            color: #ffc107;
+            color: #a78bfa;
         }
 
         /* Sticky Footer */
         main { flex: 1; }
+
+        /* Responsive */
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                background: rgba(30, 27, 75, 0.97);
+                backdrop-filter: blur(20px);
+                border-radius: 14px;
+                padding: 1rem;
+                margin-top: 0.8rem;
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .navbar-nav .nav-link {
+                padding: 0.7rem 1rem !important;
+                margin: 2px 0;
+            }
+
+            .user-nav-box {
+                margin-top: 0.5rem;
+            }
+        }
     </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
 
     <div class="container">
-        <a class="navbar-brand fw-bold" href="/">
-            <i class="fas fa-globe-asia me-2"></i>TOUR VIỆT
+        <a class="navbar-brand" href="/">
+            <div class="brand-icon">
+                <i class="fas fa-globe-asia"></i>
+            </div>
+            <span>TOUR VIỆT</span>
         </a>
 
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -100,25 +265,25 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/"><i class="fas fa-home me-1"></i>Trang chủ</a>
+                    <a class="nav-link" href="/"><i class="fas fa-home"></i>Trang chủ</a>
                 </li>
 
                 {% for cat in navbar_categories %}
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="/#region-{{ cat.CategoryID }}">
-                        <i class="fas fa-map-marker-alt me-1"></i>{{ cat.CategoryName }}
+                    <a class="nav-link" href="/#region-{{ cat.CategoryID }}">
+                        <i class="fas fa-map-marker-alt"></i>{{ cat.CategoryName }}
                     </a>
                 </li>
                 {% endfor %}
 
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('main.blog') }}">
-                        <i class="fas fa-book-open me-1"></i>Cẩm nang
+                    <a class="nav-link" href="{{ url_for('main.blog') }}">
+                        <i class="fas fa-book-open"></i>Cẩm nang
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white" href="{{ url_for('main.promotion') }}">
-                        <i class="fas fa-gift me-1"></i>Khuyến mãi
+                    <a class="nav-link" href="{{ url_for('main.promotion') }}">
+                        <i class="fas fa-gift"></i>Khuyến mãi
                     </a>
                 </li>
             </ul>
@@ -126,8 +291,9 @@
             <ul class="navbar-nav">
                 {% if current_user.is_authenticated %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle text-white fw-bold user-nav-box" href="#" id="userMenu" data-bs-toggle="dropdown">
-                        <i class="fas fa-user-circle me-1"></i> {{ current_user.FullName or 'Thành viên' }}
+                    <a class="nav-link dropdown-toggle user-nav-box" href="#" id="userMenu" data-bs-toggle="dropdown">
+                        <div class="user-avatar">{{ current_user.FullName[0] | upper if current_user.FullName else 'U' }}</div>
+                        {{ current_user.FullName or 'Thành viên' }}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end shadow">
 
@@ -135,12 +301,12 @@
                         {% if current_user.Role.lower() != 'admin' %}
                             <li>
                                 <a class="dropdown-item" href="{{ url_for('auth.profile') }}">
-                                    <i class="fas fa-user-edit me-2 text-muted"></i>Trang cá nhân
+                                    <i class="fas fa-user-edit text-muted"></i>Trang cá nhân
                                 </a>
                             </li>
                             <li>
                                 <a class="dropdown-item" href="{{ url_for('main.my_bookings') }}">
-                                    <i class="fas fa-clipboard-list me-2 text-muted"></i>Đơn hàng của tôi
+                                    <i class="fas fa-clipboard-list text-muted"></i>Đơn hàng của tôi
                                 </a>
                             </li>
                             <li><hr class="dropdown-divider"></li>
@@ -150,7 +316,7 @@
                         {% if current_user.Role.lower() == 'admin' %}
                             <li>
                                 <a class="dropdown-item fw-bold text-primary" href="{{ url_for('admin.dashboard') }}">
-                                    <i class="fas fa-user-shield me-2"></i>Quản trị hệ thống
+                                    <i class="fas fa-user-shield"></i>Quản trị hệ thống
                                 </a>
                             </li>
                             <li><hr class="dropdown-divider"></li>
@@ -158,15 +324,15 @@
 
                         <li>
                             <a class="dropdown-item text-danger" href="{{ url_for('auth.logout') }}">
-                                <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+                                <i class="fas fa-sign-out-alt"></i>Đăng xuất
                             </a>
                         </li>
                     </ul>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="btn btn-warning btn-sm px-4 rounded-pill fw-bold text-dark shadow-sm" href="{{ url_for('auth.login') }}">
-                        <i class="fas fa-sign-in-alt me-1"></i>Đăng nhập
+                    <a class="btn-login-nav" href="{{ url_for('auth.login') }}">
+                        <i class="fas fa-sign-in-alt"></i>Đăng nhập
                     </a>
                 </li>
                 {% endif %}
@@ -199,21 +365,25 @@
     {% block content %}{% endblock %}
 </main>
 
-<footer class="bg-dark text-white py-5 mt-5">
+<footer class="py-5 mt-5" style="background: linear-gradient(135deg, #1e1b4b 0%, #1e293b 100%);">
     <div class="container">
         <div class="row g-4">
             <div class="col-md-4">
-                <h5 class="fw-bold mb-3 text-warning"><i class="fas fa-globe-asia me-2"></i>TOUR VIỆT</h5>
+                <h5 class="fw-bold mb-3" style="color: #a78bfa;">
+                    <div class="brand-icon d-inline-flex me-2" style="width:32px;height:32px;background:linear-gradient(135deg,#818cf8,#a78bfa);border-radius:8px;align-items:center;justify-content:center;font-size:0.85rem;">
+                        <i class="fas fa-globe-asia text-white"></i>
+                    </div>TOUR VIỆT
+                </h5>
                 <p class="small opacity-75">Mang đến những hành trình khám phá Việt Nam trọn vẹn và ý nghĩa nhất. Chúng tôi tự hào là đơn vị cung cấp tour du lịch hàng đầu.</p>
                 <div class="mt-3">
-                    <a href="#" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fab fa-tiktok"></i></a>
-                    <a href="#" class="btn btn-outline-light btn-sm rounded-circle me-2"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="btn btn-outline-light btn-sm rounded-circle"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="btn btn-sm rounded-circle me-2" style="background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.15);width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="btn btn-sm rounded-circle me-2" style="background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.15);width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;"><i class="fab fa-tiktok"></i></a>
+                    <a href="#" class="btn btn-sm rounded-circle me-2" style="background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.15);width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="btn btn-sm rounded-circle" style="background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.15);width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
             <div class="col-md-2">
-                <h6 class="fw-bold mb-3">Vùng miền</h6>
+                <h6 class="fw-bold mb-3" style="color: #c7d2fe;">Vùng miền</h6>
                 <ul class="list-unstyled small">
                     <li class="mb-2"><a href="#" class="footer-link text-decoration-none">Miền Bắc</a></li>
                     <li class="mb-2"><a href="#" class="footer-link text-decoration-none">Miền Trung</a></li>
@@ -221,7 +391,7 @@
                 </ul>
             </div>
             <div class="col-md-3">
-                <h6 class="fw-bold mb-3">Thông tin</h6>
+                <h6 class="fw-bold mb-3" style="color: #c7d2fe;">Thông tin</h6>
                 <ul class="list-unstyled small">
                     <li class="mb-2"><a href="{{ url_for('main.blog') }}" class="footer-link text-decoration-none">Cẩm nang du lịch</a></li>
                     <li class="mb-2"><a href="{{ url_for('main.promotion') }}" class="footer-link text-decoration-none">Khuyến mãi hot</a></li>
@@ -229,19 +399,19 @@
                 </ul>
             </div>
             <div class="col-md-3">
-                <h6 class="fw-bold mb-3">Liên hệ</h6>
+                <h6 class="fw-bold mb-3" style="color: #c7d2fe;">Liên hệ</h6>
                 <p class="small opacity-75 mb-2"><i class="fas fa-phone me-2"></i> 0869.167.344</p>
                 <p class="small opacity-75 mb-2"><i class="fas fa-envelope me-2"></i> K235480106061t@tnut.edu.vn</p>
                 <p class="small opacity-75"><i class="fas fa-map-marker-alt me-2"></i> Thai Nguyen University of Technology</p>
             </div>
         </div>
-        <hr class="my-4 opacity-25">
+        <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
         <div class="row align-items-center">
             <div class="col-md-6 text-center text-md-start">
                 <p class="mb-0 small opacity-50">&copy; 2026 Website Quản Lý Tour Du Lịch </p>
             </div>
             <div class="col-md-6 text-center text-md-end">
-                <small class="opacity-50">Phát triển bởi: <strong class="text-white">Đàm Ngọc Sơn</strong> - Faculty of Electronics</small>
+                <small class="opacity-50">Phát triển bởi: <strong style="color: #a78bfa;">Đàm Ngọc Sơn</strong> - Faculty of Electronics</small>
             </div>
         </div>
     </div>
