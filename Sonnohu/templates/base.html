@@ -64,8 +64,8 @@
         }
 
         /* Nav Links */
-        .navbar-nav .nav-link {
-            color: rgba(255, 255, 255, 0.75) !important;
+        .navbar .navbar-nav .nav-link {
+            color: #fff !important;
             font-weight: 500;
             font-size: 0.9rem;
             padding: 0.5rem 0.85rem !important;
@@ -75,14 +75,14 @@
             position: relative;
         }
 
-        .navbar-nav .nav-link:hover {
-            color: #fff !important;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .navbar-nav .nav-link.active {
+        .navbar .navbar-nav .nav-link:hover {
             color: #fff !important;
             background: rgba(255, 255, 255, 0.15);
+        }
+
+        .navbar .navbar-nav .nav-link.active {
+            color: #fff !important;
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .navbar-nav .nav-link i {
@@ -92,7 +92,7 @@
         }
 
         /* User Avatar Button */
-        .user-nav-box {
+        .navbar .user-nav-box {
             background: rgba(255, 255, 255, 0.1) !important;
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 50px;
@@ -105,9 +105,10 @@
             font-size: 0.88rem;
         }
 
-        .user-nav-box:hover {
+        .navbar .user-nav-box:hover {
             background: rgba(255, 255, 255, 0.2) !important;
             border-color: rgba(255, 255, 255, 0.25);
+            color: #fff !important;
         }
 
         .user-nav-box .user-avatar {
@@ -172,7 +173,7 @@
         }
 
         /* Login Button (when not logged in) */
-        .btn-login-nav {
+        .navbar .btn-login-nav {
             background: linear-gradient(135deg, #818cf8, #6366f1);
             color: #fff !important;
             border: none;
@@ -188,7 +189,7 @@
             text-decoration: none;
         }
 
-        .btn-login-nav:hover {
+        .navbar .btn-login-nav:hover {
             transform: translateY(-1px);
             box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
             color: #fff !important;
@@ -214,7 +215,7 @@
         /* Footer Link Styling */
         .footer-link {
             text-decoration: none;
-            color: rgba(255,255,255,0.7);
+            color: rgba(255,255,255,0.75);
             transition: color 0.3s;
         }
         .footer-link:hover {
@@ -248,10 +249,10 @@
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%) !important;">
 
     <div class="container">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" style="color: #fff !important;" href="/">
             <div class="brand-icon">
                 <i class="fas fa-globe-asia"></i>
             </div>
@@ -265,24 +266,24 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/"><i class="fas fa-home"></i>Trang chủ</a>
+                    <a class="nav-link" style="color: #fff !important;" href="/"><i class="fas fa-home"></i>Trang chủ</a>
                 </li>
 
                 {% for cat in navbar_categories %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/#region-{{ cat.CategoryID }}">
+                    <a class="nav-link" style="color: #fff !important;" href="/#region-{{ cat.CategoryID }}">
                         <i class="fas fa-map-marker-alt"></i>{{ cat.CategoryName }}
                     </a>
                 </li>
                 {% endfor %}
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('main.blog') }}">
+                    <a class="nav-link" style="color: #fff !important;" href="{{ url_for('main.blog') }}">
                         <i class="fas fa-book-open"></i>Cẩm nang
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('main.promotion') }}">
+                    <a class="nav-link" style="color: #fff !important;" href="{{ url_for('main.promotion') }}">
                         <i class="fas fa-gift"></i>Khuyến mãi
                     </a>
                 </li>
@@ -291,7 +292,7 @@
             <ul class="navbar-nav">
                 {% if current_user.is_authenticated %}
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle user-nav-box" href="#" id="userMenu" data-bs-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle user-nav-box" style="color: #fff !important;" href="#" id="userMenu" data-bs-toggle="dropdown">
                         <div class="user-avatar">{{ current_user.FullName[0] | upper if current_user.FullName else 'U' }}</div>
                         {{ current_user.FullName or 'Thành viên' }}
                     </a>
@@ -331,7 +332,7 @@
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="btn-login-nav" href="{{ url_for('auth.login') }}">
+                    <a class="btn-login-nav" style="color: #fff !important;" href="{{ url_for('auth.login') }}">
                         <i class="fas fa-sign-in-alt"></i>Đăng nhập
                     </a>
                 </li>
@@ -365,7 +366,7 @@
     {% block content %}{% endblock %}
 </main>
 
-<footer class="py-5 mt-5" style="background: linear-gradient(135deg, #1e1b4b 0%, #1e293b 100%);">
+<footer class="py-5 mt-5 text-white" style="background: linear-gradient(135deg, #1e1b4b 0%, #1e293b 100%);">
     <div class="container">
         <div class="row g-4">
             <div class="col-md-4">
@@ -374,7 +375,7 @@
                         <i class="fas fa-globe-asia text-white"></i>
                     </div>TOUR VIỆT
                 </h5>
-                <p class="small opacity-75">Mang đến những hành trình khám phá Việt Nam trọn vẹn và ý nghĩa nhất. Chúng tôi tự hào là đơn vị cung cấp tour du lịch hàng đầu.</p>
+                <p class="small" style="color: rgba(255,255,255,0.75);">Mang đến những hành trình khám phá Việt Nam trọn vẹn và ý nghĩa nhất. Chúng tôi tự hào là đơn vị cung cấp tour du lịch hàng đầu.</p>
                 <div class="mt-3">
                     <a href="#" class="btn btn-sm rounded-circle me-2" style="background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.15);width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="btn btn-sm rounded-circle me-2" style="background:rgba(255,255,255,0.1);color:#fff;border:1px solid rgba(255,255,255,0.15);width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;"><i class="fab fa-tiktok"></i></a>
@@ -400,18 +401,18 @@
             </div>
             <div class="col-md-3">
                 <h6 class="fw-bold mb-3" style="color: #c7d2fe;">Liên hệ</h6>
-                <p class="small opacity-75 mb-2"><i class="fas fa-phone me-2"></i> 0869.167.344</p>
-                <p class="small opacity-75 mb-2"><i class="fas fa-envelope me-2"></i> K235480106061t@tnut.edu.vn</p>
-                <p class="small opacity-75"><i class="fas fa-map-marker-alt me-2"></i> Thai Nguyen University of Technology</p>
+                <p class="small mb-2" style="color: rgba(255,255,255,0.75);"><i class="fas fa-phone me-2"></i> 0869.167.344</p>
+                <p class="small mb-2" style="color: rgba(255,255,255,0.75);"><i class="fas fa-envelope me-2"></i> K235480106061t@tnut.edu.vn</p>
+                <p class="small" style="color: rgba(255,255,255,0.75);"><i class="fas fa-map-marker-alt me-2"></i> Thai Nguyen University of Technology</p>
             </div>
         </div>
         <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
         <div class="row align-items-center">
             <div class="col-md-6 text-center text-md-start">
-                <p class="mb-0 small opacity-50">&copy; 2026 Website Quản Lý Tour Du Lịch </p>
+                <p class="mb-0 small" style="color: rgba(255,255,255,0.5);">&copy; 2026 Website Quản Lý Tour Du Lịch </p>
             </div>
             <div class="col-md-6 text-center text-md-end">
-                <small class="opacity-50">Phát triển bởi: <strong style="color: #a78bfa;">Đàm Ngọc Sơn</strong> - Faculty of Electronics</small>
+                <small style="color: rgba(255,255,255,0.5);">Phát triển bởi: <strong style="color: #a78bfa;">Đàm Ngọc Sơn</strong> - Faculty of Electronics</small>
             </div>
         </div>
     </div>
