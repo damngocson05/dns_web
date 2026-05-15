@@ -1,4 +1,4 @@
-# Sonnohu - Website Du Lịch & Đặt Tour
+# Website Du Lịch & Đặt Tour
 
 Website đặt tour du lịch theo vùng miền, xây dựng bằng Flask + SQL Server.
 
@@ -27,5 +27,3 @@ DATABASE_URL=mssql+pyodbc:///?odbc_connect=Driver={ODBC Driver 17 for SQL Server
 python create_admin.py
 python app.py
 ```
-
-Admin: admin@sonnohu.vn / admin123
